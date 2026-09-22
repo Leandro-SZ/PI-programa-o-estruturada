@@ -16,11 +16,8 @@ Paradigma: Programação Estruturada
 Interface: Console (linha de comando)
 Armazenamento: Vetores em memória + arquivo texto (.txt)
 
-👥 Equipe
-Leandro Souza Santos
-Daniel Gomes
-Daniel Ramos
-Rafael Sezorte
+👥 Equipe: 
+Leandro Souza Santos, Daniel Gomes, Daniel Ramos, Rafael Sezorte
 
 Curso: Sistemas de Informação / Análise e Desenvolvimento de Sistemas Instituição: UNIEURO — Centro Universitário
 
