@@ -1,7 +1,5 @@
 #include <stdio.h> 
 
-  
-
 void menuPaciente() { 
 
     int opcao; 
@@ -9,15 +7,10 @@ void menuPaciente() {
     do { 
 
         printf("\n--- [ MENU PACIENTE ] ---\n"); 
-
         printf("1 -> SOLICITAR AGENDAMENTO\n"); 
-
         printf("2 -> SOLICITAR CANCELAMENTO\n"); 
-
         printf("9 -> VOLTAR\n"); 
-
         printf("Escolha uma opcao: "); 
-
         scanf("%d", &opcao); 
 
   
