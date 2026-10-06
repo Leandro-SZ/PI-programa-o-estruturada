@@ -1,282 +1,211 @@
-#include <stdio.h> 
-
-void menuPaciente() { 
-
-    int opcao; 
-
-    do { 
-
-        printf("\n--- [ MENU PACIENTE ] ---\n"); 
-        printf("1 -> SOLICITAR AGENDAMENTO\n"); 
-        printf("2 -> SOLICITAR CANCELAMENTO\n"); 
-        printf("9 -> VOLTAR\n"); 
-        printf("Escolha uma opcao: "); 
-        scanf("%d", &opcao); 
-
-  
-
-        switch(opcao) { 
-
-            case 1: 
-
-                printf("\n[Processando solicitacao de agendamento...]\n"); 
-
-                break; 
-
-            case 2: 
-
-                printf("\n[Processando solicitacao de cancelamento...]\n"); 
-
-                break; 
-
-            case 9: 
-
-                printf("\nRetornando ao Menu Principal...\n"); 
-
-                break; 
-
-            default: 
-
-                printf("\nOpcao invalida! Tente novamente.\n"); 
-
-        } 
-
-    } while(opcao != 9); 
-
-} 
-
-  
-
-void menuRecepcao() { 
-
-    int opcao; 
-
-    do { 
-
-        printf("\n--- [ MENU RECEPCAO ] ---\n"); 
-
-        printf("1 -> CONFIRMAR CONSULTA\n"); 
-
-        printf("2 -> CANCELAR CONSULTA\n"); 
-
-        printf("9 -> VOLTAR\n"); 
-
-        printf("Escolha uma opcao: "); 
-
-        scanf("%d", &opcao); 
-
-  
-
-        switch(opcao) { 
-
-            case 1: 
-
-                printf("\n[Processando confirmacao de consulta...]\n"); 
-
-                break; 
-
-            case 2: 
-
-                printf("\n[Processando cancelamento de consulta...]\n"); 
-
-                break; 
-
-            case 9: 
-
-                printf("\nRetornando ao Menu Principal...\n"); 
-
-                break; 
-
-            default: 
-
-                printf("\nOpcao invalida! Tente novamente.\n"); 
-
-        } 
-
-    } while(opcao != 9); 
-
-} 
-
-  
-
-void menuEnfermeiro() { 
-
-    int opcao; 
-
-    do { 
-
-        printf("\n--- [ MENU ENFERMEIRO ] ---\n"); 
-
-        printf("1 -> REGISTRAR SINAIS VITAIS\n"); 
-
-        printf("2 -> CLASSIFICACAO DE RISCO\n"); 
-
-        printf("9 -> VOLTAR\n"); 
-
-        printf("Escolha uma opcao: "); 
-
-        scanf("%d", &opcao); 
-        
-        char c;
-        while (c != '\n' && c != EOF)
-        {
-            c = getchar();
-        };
-
-        switch(opcao) { 
-
-            case 1: 
-
-                printf("\n[Registrando sinais vitais do paciente...]\n"); 
-
-                break; 
-
-            case 2: 
-
-                printf("\n[Realizando classificacao de risco...]\n"); 
-
-                break; 
-
-            case 9: 
-
-                printf("\nRetornando ao Menu Principal...\n"); 
-
-                break; 
-
-            default: 
-
-                printf("\nOpcao invalida! Tente novamente.\n"); 
-
-        } 
-
-    } while(opcao != 9); 
-
-} 
-
-  
-
-void menuMedico() { 
-
-    int opcao; 
-
-    do { 
-
-        printf("\n--- [ MENU MEDICO ] ---\n"); 
-
-        printf("1 -> ACESSAR PRONTUARIO\n"); 
-
-        printf("2 -> SOLICITAR EXAMES\n"); 
-
-        printf("9 -> VOLTAR\n"); 
-
-        printf("Escolha uma opcao: "); 
-
-        scanf("%d", &opcao); 
-
-  
-
-        switch(opcao) { 
-
-            case 1: 
-
-                printf("\n[Acessando Prontuario Eletronico do Paciente - PEP...]\n"); 
-
-                break; 
-
-            case 2: 
-
-                printf("\n[Solicitando exames complementares...]\n"); 
-
-                break; 
-
-            case 9: 
-
-                printf("\nRetornando ao Menu Principal...\n"); 
-
-                break; 
-
-            default: 
-
-                printf("\nOpcao invalida! Tente novamente.\n"); 
-
-        } 
-
-    } while(opcao != 9); 
-
-} 
-
-  
-
-int main() { 
-
-    int opcao; 
-
-    do { 
-
-        printf("\n====================================\n"); 
-
-        printf("     SISTEMA HJK - MENU PRINCIPAL   \n"); 
-
-        printf("====================================\n"); 
-
-        printf("1 -> [MENU PACIENTE]\n"); 
-
-        printf("2 -> [MENU RECEPCAO]\n"); 
-
-        printf("3 -> [MENU ENFERMEIRO]\n"); 
-
-        printf("4 -> [MENU MEDICO]\n"); 
-
-        printf("0 -> SAIR\n"); 
-
-        printf("Escolha uma opcao: "); 
-
-        scanf("%d", &opcao); 
-
-  
-
-        switch(opcao) { 
-
-            case 1: 
-
-                menuPaciente(); 
-
-                break; 
-
-            case 2: 
-
-                menuRecepcao(); 
-
-                break; 
-
-            case 3: 
-
-                menuEnfermeiro(); 
-
-                break; 
-
-            case 4: 
-
-                menuMedico(); 
-
-                break; 
-
-            case 0: 
-
-                printf("\nEncerrando o Sistema HJK. Ate logo!\n"); 
-
-                break; 
-
-            default: 
-
-                printf("\nOpcao invalida! Tente novamente.\n"); 
-
-        } 
-
-    } while(opcao != 0); 
-
-  
-
-    return 0; 
-
+/*
+ * SISTEMA HJK - Menus de console
+ *
+ * Compilar: gcc -Wall -Wextra -o sistema_hjk sistema_hjk.c
+ */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+
+/* ---------- Configuracoes ---------- */
+
+#ifdef _WIN32
+    #define COMANDO_LIMPAR "cls"
+#else
+    #define COMANDO_LIMPAR "clear"
+#endif
+
+#define LARGURA_BANNER 36
+#define TAM_BUFFER     64
+#define OPCAO_INVALIDA (-1)
+#define OPCAO_EOF      (-2)
+#define CODIGO_SAIR    0
+#define CODIGO_VOLTAR  9
+#define QTD_ITENS(v)   (sizeof(v) / sizeof((v)[0]))
+
+/* Um item de menu: ou executa uma funcao (submenu) ou mostra uma mensagem */
+typedef void (*FuncaoAcao)(void);
+
+typedef struct {
+    int         codigo;
+    const char *rotulo;
+    const char *mensagem;
+    FuncaoAcao  acao;
+} ItemMenu;
+
+/* ---------- Utilitarios de tela e entrada ---------- */
+
+static void limparTela(void) {
+    if (system(COMANDO_LIMPAR) != 0) {
+        printf("\033[2J\033[H"); /* alternativa ANSI se o comando falhar */
+    }
+}
+
+static void descartarLinha(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) {
+        /* consome o resto da linha */
+    }
+}
+
+static void aguardarEnter(void) {
+    printf("\nPressione ENTER para continuar...");
+    descartarLinha();
+}
+
+/*
+ * Le uma linha inteira e converte para numero.
+ * Retorna OPCAO_INVALIDA (letras, vazio, lixo) ou OPCAO_EOF (fim da entrada).
+ */
+static int lerOpcao(void) {
+    char  buffer[TAM_BUFFER];
+    char *fim;
+    long  valor;
+
+    if (fgets(buffer, sizeof buffer, stdin) == NULL) {
+        return OPCAO_EOF;
+    }
+
+    /* Linha maior que o buffer: joga fora o resto para nao sobrar lixo */
+    if (strchr(buffer, '\n') == NULL && !feof(stdin)) {
+        descartarLinha();
+        return OPCAO_INVALIDA;
+    }
+
+    errno = 0;
+    valor = strtol(buffer, &fim, 10);
+    if (fim == buffer || errno == ERANGE) {
+        return OPCAO_INVALIDA;
+    }
+
+    while (*fim == ' ' || *fim == '\t') {
+        fim++;
+    }
+    if (*fim != '\n' && *fim != '\r' && *fim != '\0') {
+        return OPCAO_INVALIDA; /* ex.: "1abc" ou "1 2" */
+    }
+    if (valor < 0 || valor > 999) {
+        return OPCAO_INVALIDA;
+    }
+    return (int)valor;
+}
+
+static void imprimirLinha(char c) {
+    int i;
+    for (i = 0; i < LARGURA_BANNER; i++) {
+        putchar(c);
+    }
+    putchar('\n');
+}
+
+static void imprimirCentralizado(const char *texto) {
+    int pad = (LARGURA_BANNER - (int)strlen(texto)) / 2;
+    if (pad < 0) {
+        pad = 0;
+    }
+    printf("%*s%s\n", pad, "", texto);
+}
+
+static void imprimirBanner(const char *subtitulo) {
+    imprimirLinha('=');
+    imprimirCentralizado("SISTEMA HJK");
+    imprimirCentralizado(subtitulo);
+    imprimirLinha('=');
+    putchar('\n');
+}
+
+/* ---------- Motor de menus (reaproveitado por todos os menus) ---------- */
+
+static void executarMenu(const char *subtitulo, const ItemMenu *itens, size_t qtd,
+                         int codigoSaida, const char *rotuloSaida) {
+    int             opcao;
+    size_t          i;
+    const ItemMenu *escolhido;
+
+    for (;;) {
+        limparTela();
+        imprimirBanner(subtitulo);
+
+        for (i = 0; i < qtd; i++) {
+            printf("%d -> %s\n", itens[i].codigo, itens[i].rotulo);
+        }
+        printf("%d -> %s\n", codigoSaida, rotuloSaida);
+        printf("\nEscolha uma opcao: ");
+
+        opcao = lerOpcao();
+        if (opcao == OPCAO_EOF || opcao == codigoSaida) {
+            return;
+        }
+
+        escolhido = NULL;
+        for (i = 0; i < qtd; i++) {
+            if (itens[i].codigo == opcao) {
+                escolhido = &itens[i];
+                break;
+            }
+        }
+
+        if (escolhido == NULL) {
+            printf("\nOpcao invalida! Tente novamente.\n");
+            aguardarEnter();
+        } else if (escolhido->acao != NULL) {
+            escolhido->acao();
+        } else {
+            printf("\n[%s]\n", escolhido->mensagem);
+            aguardarEnter();
+        }
+    }
+}
+
+/* ---------- Submenus ---------- */
+
+static void menuPaciente(void) {
+    static const ItemMenu itens[] = {
+        {1, "SOLICITAR AGENDAMENTO",  "Processando solicitacao de agendamento...",  NULL},
+        {2, "SOLICITAR CANCELAMENTO", "Processando solicitacao de cancelamento...", NULL}
+    };
+    executarMenu("MENU PACIENTE", itens, QTD_ITENS(itens), CODIGO_VOLTAR, "VOLTAR");
+}
+
+static void menuRecepcao(void) {
+    static const ItemMenu itens[] = {
+        {1, "CONFIRMAR CONSULTA", "Processando confirmacao de consulta...",  NULL},
+        {2, "CANCELAR CONSULTA",  "Processando cancelamento de consulta...", NULL}
+    };
+    executarMenu("MENU RECEPCAO", itens, QTD_ITENS(itens), CODIGO_VOLTAR, "VOLTAR");
+}
+
+static void menuEnfermeiro(void) {
+    static const ItemMenu itens[] = {
+        {1, "REGISTRAR SINAIS VITAIS", "Registrando sinais vitais do paciente...", NULL},
+        {2, "CLASSIFICACAO DE RISCO",  "Realizando classificacao de risco...",     NULL}
+    };
+    executarMenu("MENU ENFERMEIRO", itens, QTD_ITENS(itens), CODIGO_VOLTAR, "VOLTAR");
+}
+
+static void menuMedico(void) {
+    static const ItemMenu itens[] = {
+        {1, "ACESSAR PRONTUARIO", "Acessando Prontuario Eletronico do Paciente - PEP...", NULL},
+        {2, "SOLICITAR EXAMES",   "Solicitando exames complementares...",                 NULL}
+    };
+    executarMenu("MENU MEDICO", itens, QTD_ITENS(itens), CODIGO_VOLTAR, "VOLTAR");
+}
+
+/* ---------- Programa principal ---------- */
+
+int main(void) {
+    static const ItemMenu itens[] = {
+        {1, "MENU PACIENTE",   NULL, menuPaciente},
+        {2, "MENU RECEPCAO",   NULL, menuRecepcao},
+        {3, "MENU ENFERMEIRO", NULL, menuEnfermeiro},
+        {4, "MENU MEDICO",     NULL, menuMedico}
+    };
+
+    executarMenu("MENU PRINCIPAL", itens, QTD_ITENS(itens), CODIGO_SAIR, "SAIR");
+
+    limparTela();
+    printf("Encerrando o Sistema HJK. Ate logo!\n");
+    return 0;
 }
